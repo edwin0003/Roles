@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id         String    @id @default(uuid())
+  username   String
+  email      String @unique
+  password   String
+  rol        Rol       @relation(fields: [rolId], references: [id])
+  rolId      String
+  Persimos   Persimos[]
+  createAt DateTime @default(now())
+  update DateTime @updatedAt
+
+}
+
+model Rol {
+  id   String @id @default(uuid())
+  name String @unique
+  User User[]
+  createAt DateTime @default(now())
+  update DateTime @updatedAt
+}
+
+model Persimos {
+  id   String @id @default(uuid())
+  name String @unique
+  user User[]
+  createAt DateTime @default(now())
+  update DateTime @updatedAt
+}
