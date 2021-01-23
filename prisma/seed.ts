@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
-
+import * as bcrypt from 'bcrypt';
+const prisma = new PrismaClient()  
+const hash = bcrypt.hashSync("12345", 10);
 // A `main` function so that we can use async/await
 async function main() {
 
@@ -12,7 +12,7 @@ async function main() {
     data: {
         username:"ecm123",
         email: "ecm@gmail.com",
-        password: "12345",
+        password: hash,
         rol:{connect: {name: "root"}},
         Persimos: {create:[{name:"crear_usuario"}, {name:"actualizar_usuario"}, {name:"eliminar_usuario"},{name:"listar_usuario"},{name:"ver_usuario"}]}
     }
