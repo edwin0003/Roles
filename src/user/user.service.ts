@@ -31,7 +31,7 @@ export class UserService {
   findEmail(email: string) {
     return this.prisma.user.findUnique({
       where: { email: email },
-      include: { Persimos: { select: { id: true, name: true } }, rol:{select: {id:true, name:true}} },
+      include: { rol:{include:{Persimos: { select: { id: true, name: true } },}} },
     });
   }
 }

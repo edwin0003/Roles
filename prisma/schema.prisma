@@ -17,7 +17,6 @@ model User {
   password   String
   rol        Rol       @relation(fields: [rolId], references: [id])
   rolId      String
-  Persimos   Persimos[]
   createAt DateTime @default(now())
   update DateTime @updatedAt
 
@@ -27,6 +26,7 @@ model Rol {
   id   String @id @default(uuid())
   name String @unique
   User User[]
+  Persimos   Persimos[]
   createAt DateTime @default(now())
   update DateTime @updatedAt
 }
@@ -34,7 +34,8 @@ model Rol {
 model Persimos {
   id   String @id @default(uuid())
   name String @unique
-  user User[]
+  roles   Rol[]
   createAt DateTime @default(now())
   update DateTime @updatedAt
+
 }

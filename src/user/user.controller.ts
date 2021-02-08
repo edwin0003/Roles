@@ -24,8 +24,7 @@ export class UserController {
   create(@Body() createUserDto: any) {
     return this.userService.create(createUserDto);
   }
- 
- 
+
   @Permisos(Permiso.listar_usuario)
   @Get()
   findAll() {
@@ -36,11 +35,13 @@ export class UserController {
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
   }
+  
   @Permisos(Permiso.actulizar_usuario)
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: any) {
     return this.userService.update(id, updateUserDto);
   }
+
   @Permisos(Permiso.eliminar_usuario)
   @Delete(':id')
   remove(@Param('id') id: string) {
